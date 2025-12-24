@@ -88,9 +88,10 @@ import java.net.URI;
                       }
                 """
         ),
-    }
+    },
+    aliases = "io.kestra.plugin.notifications.discord.DiscordIncomingWebhook"
 )
-public class DiscordIncomingWebhook extends AbstractHttpOptionsTask {
+public class DiscordIncomingWebhook extends AbstractDiscordConnection {
 
     @Schema(
         title = "Webhook URL which should be taken from discord integrations tab."

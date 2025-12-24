@@ -25,7 +25,7 @@ import java.util.Map;
 @EqualsAndHashCode
 @Getter
 @NoArgsConstructor
-public abstract class AbstractHttpOptionsTask extends Task implements RunnableTask<VoidOutput> {
+public abstract class AbstractDiscordConnection extends Task implements RunnableTask<VoidOutput> {
     @Schema(
         title = "Options",
         description = "The options to set to customize the HTTP client"

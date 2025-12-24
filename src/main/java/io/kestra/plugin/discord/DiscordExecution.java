@@ -58,7 +58,8 @@ import java.util.Map;
                         prefix: true
                 """
         )
-    }
+    },
+    aliases = "io.kestra.plugin.notifications.discord.DiscordExecution"
 )
 public class DiscordExecution extends DiscordTemplate implements ExecutionInterface {
     @Builder.Default
