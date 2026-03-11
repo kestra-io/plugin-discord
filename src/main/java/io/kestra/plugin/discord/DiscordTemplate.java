@@ -1,18 +1,20 @@
 package io.kestra.plugin.discord;
 
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+
+import org.apache.commons.io.IOUtils;
+
 import io.kestra.core.models.annotations.PluginProperty;
 import io.kestra.core.models.property.Property;
 import io.kestra.core.models.tasks.VoidOutput;
 import io.kestra.core.runners.RunContext;
 import io.kestra.core.serializers.JacksonMapper;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
-import org.apache.commons.io.IOUtils;
-
-import java.nio.charset.StandardCharsets;
-import java.util.*;
 
 import static io.kestra.core.utils.Rethrow.throwFunction;
 
@@ -70,16 +72,14 @@ public abstract class DiscordTemplate extends DiscordIncomingWebhook {
 
         if (renderedUri.isPresent()) {
             String template = IOUtils.toString(
-                Objects.requireNonNull(this.getClass()
-                    .getClassLoader().
-                    getResourceAsStream(renderedUri.get())
+                Objects.requireNonNull(
+                    this.getClass()
+                        .getClassLoader().getResourceAsStream(renderedUri.get())
                 ),
                 StandardCharsets.UTF_8
             );
 
-            String render = runContext.render(template, templateRenderMap != null ?
-                runContext.render(templateRenderMap).asMap(String.class, Object.class) :
-                Map.of());
+            String render = runContext.render(template, templateRenderMap != null ? runContext.render(templateRenderMap).asMap(String.class, Object.class) : Map.of());
             mainMap = (Map<String, Object>) JacksonMapper.ofJson().readValue(render, Object.class);
         }
 
@@ -186,11 +186,13 @@ public abstract class DiscordTemplate extends DiscordIncomingWebhook {
             runContext.render(this.thumbnail).as(String.class).ifPresent(url -> embedMap.put("thumbnail", Map.of("url", url)));
 
             if (this.authorName != null) {
-                embedMap.put("author", Map.of(
-                    "name", runContext.render(this.authorName).as(String.class).orElse(null),
-                    "url", runContext.render(this.websiteUrl).as(String.class).orElse(null),
-                    "icon_url", runContext.render(avatarUrl).as(String.class).orElse(null)
-                ));
+                embedMap.put(
+                    "author", Map.of(
+                        "name", runContext.render(this.authorName).as(String.class).orElse(null),
+                        "url", runContext.render(this.websiteUrl).as(String.class).orElse(null),
+                        "icon_url", runContext.render(avatarUrl).as(String.class).orElse(null)
+                    )
+                );
             }
 
             if (this.color != null) {
