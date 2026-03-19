@@ -47,7 +47,7 @@ public class DiscordIncomingWebhookTest {
         DiscordIncomingWebhook task = DiscordIncomingWebhook.builder()
             .url(embeddedServer.getURI() + "/webhook-unit-test")
             .payload(
-                new Property<>(
+                Property.ofExpression(
                     Files.asCharSource(
                         new File(
                             Objects.requireNonNull(
