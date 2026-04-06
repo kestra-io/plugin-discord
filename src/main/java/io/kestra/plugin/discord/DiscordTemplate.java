@@ -29,32 +29,37 @@ public abstract class DiscordTemplate extends DiscordIncomingWebhook {
         title = "Template to use",
         hidden = true
     )
+    @PluginProperty(group = "advanced")
     protected Property<String> templateUri;
 
     @Schema(
         title = "Map of variables to use for the message template"
     )
+    @PluginProperty(group = "advanced")
     protected Property<Map<String, Object>> templateRenderMap;
 
     @Schema(
         title = "Webhook username"
     )
+    @PluginProperty(group = "connection")
     protected Property<String> username;
 
     @Schema(
         title = "Webhook avatar URL"
     )
+    @PluginProperty(group = "connection")
     protected Property<String> avatarUrl;
 
     @Schema(
         title = "Adds an embed to the discord notification body"
     )
-    @PluginProperty(dynamic = true)
+    @PluginProperty(dynamic = true, group = "advanced")
     protected List<Embed> embedList;
 
     @Schema(
         title = "Message content"
     )
+    @PluginProperty(group = "advanced")
     protected Property<String> content;
 
     @SuppressWarnings("unchecked")
@@ -129,38 +134,44 @@ public abstract class DiscordTemplate extends DiscordIncomingWebhook {
         @Schema(
             title = "Title"
         )
+        @PluginProperty(group = "advanced")
         protected Property<String> title;
 
         @Schema(
             title = "Website URL, link title with given URL"
         )
+        @PluginProperty(group = "connection")
         protected Property<String> websiteUrl;
 
         @Schema(
             title = "Message description"
         )
+        @PluginProperty(group = "advanced")
         protected Property<String> description;
 
         @Schema(
             title = "Thumbnail URL"
         )
+        @PluginProperty(group = "advanced")
         protected Property<String> thumbnail;
 
         @Schema(
             title = "Message author name"
         )
+        @PluginProperty(group = "connection")
         protected Property<String> authorName;
 
         @Schema(
             title = "RGB color of text",
             description = "Example: [255, 255, 255]"
         )
-        @PluginProperty
+        @PluginProperty(group = "advanced")
         protected Integer[] color;
 
         @Schema(
             title = "Footer text"
         )
+        @PluginProperty(group = "advanced")
         protected Property<String> footer;
 
         private int getColor() {
