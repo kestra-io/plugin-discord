@@ -97,13 +97,14 @@ public class DiscordIncomingWebhook extends AbstractDiscordConnection {
     @Schema(
         title = "Webhook URL which should be taken from discord integrations tab."
     )
-    @PluginProperty(dynamic = true)
+    @PluginProperty(dynamic = true, group = "main")
     @NotBlank
     protected String url;
 
     @Schema(
         title = "Discord message payload"
     )
+    @PluginProperty(group = "main")
     protected Property<String> payload;
 
     @Override
