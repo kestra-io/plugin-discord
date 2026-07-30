@@ -1,4 +1,5 @@
 @PluginSubGroup(
+    title = "Discord",
     description = "This sub-group of plugins contains tasks for Discord notifications.",
     categories = PluginSubGroup.PluginCategory.BUSINESS
 )
