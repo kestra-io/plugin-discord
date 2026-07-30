@@ -54,7 +54,7 @@ import lombok.experimental.SuperBuilder;
                       {
                         "username": "MyUsername",
                         "content": "Failure alert for flow {{ flow.namespace }}.{{ flow.id }} with ID {{ execution.id }}",
-                        "embedList": [{
+                        "embeds": [{
                                 "title": "Discord Notification"
                             }]
                       }
@@ -95,7 +95,7 @@ import lombok.experimental.SuperBuilder;
 public class DiscordIncomingWebhook extends AbstractDiscordConnection {
 
     @Schema(
-        title = "Webhook URL which should be taken from discord integrations tab"
+        title = "Webhook URL, which should be taken from the Discord integrations tab"
     )
     @PluginProperty(dynamic = true, group = "main", secret = true)
     @NotBlank
