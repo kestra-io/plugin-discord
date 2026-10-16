@@ -197,15 +197,18 @@ public abstract class DiscordTemplate extends DiscordIncomingWebhook {
             runContext.render(this.thumbnail).as(String.class).ifPresent(url -> embedMap.put("thumbnail", Map.of("url", url)));
 
             if (this.authorName != null) {
-                embedMap.put(
-                    "author", Map.of(
-                        "name", runContext.render(this.authorName).as(String.class).orElse(null),
-                        "url", runContext.render(this.websiteUrl).as(String.class).orElse(null),
-                        "icon_url", runContext.render(avatarUrl).as(String.class).orElse(null)
-                    )
-                );
-            }
+                Map<String, Object> author = new HashMap<>();
+                runContext.render(this.authorName).as(String.class)
+                    .ifPresent(name -> author.put("name", name));
 
+                runContext.render(this.websiteUrl).as(String.class)
+                    .ifPresent(url -> author.put("url", url));
+
+                runContext.render(avatarUrl).as(String.class)
+                    .ifPresent(url -> author.put("icon_url", url));
+
+                embedMap.put("author", author);
+            }
             if (this.color != null) {
                 embedMap.put("color", getColor());
             }
@@ -214,7 +217,6 @@ public abstract class DiscordTemplate extends DiscordIncomingWebhook {
 
             return embedMap;
         }
-
     }
 
 }
