@@ -20,6 +20,7 @@ import jakarta.inject.Inject;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 
 @KestraTest
 public class DiscordIncomingWebhookTest {
@@ -80,8 +81,8 @@ public class DiscordIncomingWebhookTest {
         @SuppressWarnings("unchecked")
         Map<String, Object> author = (Map<String, Object>) embedMap.get("author");
 
-        assertThat(author.get("name"), org.hamcrest.Matchers.is("Test Author"));
-        assertThat(author.containsKey("url"), org.hamcrest.Matchers.is(false));
-        assertThat(author.containsKey("icon_url"), org.hamcrest.Matchers.is(false));
+        assertThat(author.get("name"), is("Test Author"));
+        assertThat(author.containsKey("url"), is(false));
+        assertThat(author.containsKey("icon_url"), is(false));
     }
 }
